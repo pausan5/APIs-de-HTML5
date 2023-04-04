@@ -1,0 +1,52 @@
+<video id="videoPlayer" controls>
+    <source src="/Users/psanc/OneDrive/Escritorio/APIs/video.mp4" type="video/mp4">
+</video>
+
+<div>
+    <button onclick="playVideo()">Play</button>
+    <button onclick="pauseVideo()">Pause</button>
+    <button onclick="volumeUp()">Volume Up</button>
+    <button onclick="volumeDown()">Volume Down</button>
+</div>
+
+<div id="loadingMessage">Loading video...</div>
+<div id="errorMessage" style="display: none;">Error loading video. Please check the file type.</div>
+
+<script>
+    const videoPlayer = document.getElementById('videoPlayer');
+    const loadingMessage = document.getElementById('loadingMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    function playVideo() {
+        videoPlayer.play();
+    }
+
+    function pauseVideo() {
+        videoPlayer.pause();
+    }
+
+    function volumeUp() {
+        videoPlayer.volume += 0.1;
+    }
+
+    function volumeDown() {
+        videoPlayer.volume -= 0.1;
+    }
+
+    function loaded() {
+        loadingMessage.style.display = 'none';
+    }
+
+    function error() {
+        loadingMessage.style.display = 'none';
+        errorMessage.style.display = 'block';
+    }
+
+    videoPlayer.addEventListener('loadstart', () => {
+        loadingMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+    });
+
+    videoPlayer.addEventListener('loadedmetadata', loaded);
+    videoPlayer.addEventListener('error', error);
+</script>
